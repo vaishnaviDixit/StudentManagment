@@ -1,0 +1,90 @@
+/* Background and overlay styles */
+.student-container {
+  background-image: url("https://images.unsplash.com/photo-1497633762265-9d179a990aa6"); /* Lighter background image */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.overlay {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.4
+  ); /* Semi-transparent white overlay */
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Card styles with transparency */
+.card {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Slightly transparent white background */
+  border-radius: 10px;
+  border: none; /* Remove default border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better contrast */
+}
+
+/* Table styles with transparency */
+.table {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Slightly transparent white background */
+  border-radius: 10px;
+  overflow: hidden; /* Ensure rounded corners */
+}
+
+.table thead th {
+  background-color: rgba(
+    52,
+    58,
+    64,
+    0.9
+  ); /* Semi-transparent dark background for table header */
+  color: white; /* White text for header */
+}
+
+.table tbody td {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Slightly transparent white background for table rows */
+}
+
+/* Button styles */
+.btn {
+  margin: 5px;
+}
+
+/* Text styles for better readability */
+h1 {
+  font-weight: bold;
+  color: #333; /* Dark text color */
+}
+
+/* Form input styles */
+.form-control {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Slightly opaque background for inputs */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Light border for inputs */
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 1); /* Fully opaque on focus */
+  border-color: rgba(0, 0, 0, 0.2); /* Darker border on focus */
+}
