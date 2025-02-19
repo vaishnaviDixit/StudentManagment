@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./studentt.css"; // Import the CSS file for styling
+import API_BASE_URL from "../config";
+import "./studentt.css";
 
 function Student() {
   const [studentid, setId] = useState("");
@@ -14,67 +15,72 @@ function Student() {
   }, []);
 
   async function Load() {
-    const result = await axios.get(
-      "http://localhost:8089/api/v1/student/getAll"
-    );
-    setUsers(result.data);
-    console.log(result.data);
+    try {
+      const result = await axios.get(`${API_BASE_URL}/api/v1/student/getAll`);
+      setUsers(result.data);
+      console.log(result.data);
+    } catch (error) {
+      console.error("Error fetching student data:", error);
+    }
   }
 
   async function save(event) {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8089/api/v1/student/save", {
-        studentname: studentname,
-        studentaddress: studentaddress,
-        mobile: mobile,
+      await axios.post(`${API_BASE_URL}/api/v1/student/save`, {
+        studentname,
+        studentaddress,
+        mobile,
       });
       alert("Student Registration Successful");
-      setId("");
-      setName("");
-      setAddress("");
-      setMobile("");
+      resetForm();
       Load();
     } catch (err) {
       alert("Student Registration Failed");
+      console.error(err);
     }
   }
 
-  async function editStudent(students) {
-    setName(students.studentname);
-    setAddress(students.studentaddress);
-    setMobile(students.mobile);
-    setId(students._id);
+  async function editStudent(student) {
+    setName(student.studentname);
+    setAddress(student.studentaddress);
+    setMobile(student.mobile);
+    setId(student._id);
   }
 
   async function DeleteStudent(studentid) {
-    await axios.delete(
-      "http://localhost:8089/api/v1/student/delete/" + studentid
-    );
-    alert("Student Deleted Successfully");
-    Load();
+    try {
+      await axios.delete(`${API_BASE_URL}/api/v1/student/delete/${studentid}`);
+      alert("Student Deleted Successfully");
+      Load();
+    } catch (err) {
+      alert("Failed to delete student");
+      console.error(err);
+    }
   }
 
   async function update(event) {
     event.preventDefault();
     try {
-      await axios.put(
-        "http://localhost:8089/api/v1/student/edit/" + studentid,
-        {
-          studentname: studentname,
-          studentaddress: studentaddress,
-          mobile: mobile,
-        }
-      );
-      alert("Registration Updated");
-      setId("");
-      setName("");
-      setAddress("");
-      setMobile("");
+      await axios.put(`${API_BASE_URL}/api/v1/student/edit/${studentid}`, {
+        studentname,
+        studentaddress,
+        mobile,
+      });
+      alert("Student Updated Successfully");
+      resetForm();
       Load();
     } catch (err) {
       alert("Student Update Failed");
+      console.error(err);
     }
+  }
+
+  function resetForm() {
+    setId("");
+    setName("");
+    setAddress("");
+    setMobile("");
   }
 
   return (
